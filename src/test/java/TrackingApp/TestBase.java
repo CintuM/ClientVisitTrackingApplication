@@ -6,14 +6,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.time.Duration;
 import java.util.Properties;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
-import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class TestBase {
 
@@ -31,33 +27,36 @@ public class TestBase {
 
 	@BeforeSuite
 	public void launch() throws IOException {
-		loadprop();		
-		String browserName = prop.getProperty("browser");
-		System.out.println(browserName);
-		if(browserName.equals("chrome")) {
+		loadprop();	
 
-			driver =new ChromeDriver();	
-//			ChromeOptions option = new ChromeOptions();
-//			option.addArguments("incognito");
-//			WebDriverManager.chromedriver().setup();
-//			driver = new ChromeDriver(option);
-			
-		}
-		else if(browserName.equals("firefox")) {
-
-			driver =new FirefoxDriver();			
-
-		}
+		this.driver = new ChromeDriver();
 		driver.get(prop.getProperty("url"));
-		driver.manage().window().maximize();	
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+		driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
+		//		String browserName = prop.getProperty("browser");
+		//		System.out.println(browserName);
+		//		if(browserName.equals("chrome")) {
+		//
+		//			driver =new ChromeDriver();	
+		//			ChromeOptions option = new ChromeOptions();
+		//			option.addArguments("incognito");
+		//			WebDriverManager.chromedriver().setup();
+		//			driver = new ChromeDriver(option);
+
+		//	}
+
+		//driver.get(prop.getProperty("url"));
+		//driver.manage().window().maximize();	
+
 	}
+	public void waitabit() {
+		driver.manage().timeouts().implicitlyWait((Duration.ofSeconds(10)));	
+	}
+	
+	@AfterSuite
+	public void new_setup() {
+		driver.quit();
 
-		@AfterSuite
-		public void new_setup() {
-			driver.quit();
-			
-		}
-
-
+	}
 }
