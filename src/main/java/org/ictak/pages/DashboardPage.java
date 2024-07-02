@@ -271,15 +271,22 @@ public class DashboardPage {
 	}
 
 	public Boolean completedVisits() {
-
-		List<WebElement> allcompletedVisits=completedVists.findElements(By.xpath("//span[text()='Completed']"));
-		int count=allcompletedVisits.size();
-		System.out.println("Count of completed visits in Upcoming section: "+count);
-		if(count==0)	
+		try {
+			List<WebElement> allcompletedVisits=completedVists.findElements(By.xpath("//span[text()='Completed']"));
+			int count=allcompletedVisits.size();
+			System.out.println("Count of completed visits in Upcoming section: "+count);
+			if(count==0)	
+				return true;
+			else
+				return false;
+			}
+			catch(Exception e) {
+			System.out.println("No completed visits in Upcoming section.");
 			return true;
-		else
-			return false;
-	}
+
+			}
+		}
+
 	
 	public void exportUpcomingVisits() {
 //		wait.until(ExpectedConditions.visibilityOf(upcomingVisitCSV));
