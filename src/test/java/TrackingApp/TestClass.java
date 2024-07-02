@@ -133,7 +133,7 @@ public class TestClass extends TestBase{
 		login.setName(prop.getProperty("useridManagerC"));
 		login.setPwd(prop.getProperty("pwdManagerC"));
 		login.login();
-		actualResults=db.addNewVisit("ICTAK Koratty","Associate 1","Testing","Arun (developer)","TestingNote","4-11-2024");
+		actualResults=db.addNewVisit("ICTAK Koratty","Associate 1","Testing","Arun (developer)","TestingNote","31-12-2024");
 		login.logOut();	
 		Assert.assertEquals(actualResults, true);
 	}
