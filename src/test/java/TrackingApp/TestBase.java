@@ -8,40 +8,55 @@ import java.time.Duration;
 import java.util.Properties;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
 public class TestBase {
 
-	WebDriver driver;
-	Properties prop=null;
+	public static WebDriver driver=null;
+	public Properties prop =null;
 
 
-	public void loadProp() throws IOException {
-		prop = new Properties();
-		 InputStream fileip = getClass().getResourceAsStream("/config.properties");
-			new BufferedReader(new InputStreamReader(fileip));
-			prop.load(fileip);
-	}
-	
+	public void loadprop() throws IOException {
+
+		prop = new Properties();		
+		InputStream fileip = getClass().getResourceAsStream("/config.properties");
+		BufferedReader reader = new BufferedReader(new InputStreamReader(fileip));
+		prop.load(fileip);		
+	}	
+
 	@BeforeSuite
-	public void setup() throws IOException{
-		loadProp();
-//		System.setProperty("webdriver.chrome.driver", "path for chromedriver.exe");
-//		ChromeOptions options = new ChromeOptions();
-//		options.addArguments("--incognito");
+	public void launch() throws IOException {
+		loadprop();	
+
 		this.driver = new ChromeDriver();
 		driver.get(prop.getProperty("url"));
 		driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
+		//		String browserName = prop.getProperty("browser");
+		//		System.out.println(browserName);
+		//		if(browserName.equals("chrome")) {
+		//
+		//			driver =new ChromeDriver();	
+		//			ChromeOptions option = new ChromeOptions();
+		//			option.addArguments("incognito");
+		//			WebDriverManager.chromedriver().setup();
+		//			driver = new ChromeDriver(option);
+
+		//	}
+
+		//driver.get(prop.getProperty("url"));
+		//driver.manage().window().maximize();	
+
+	}
+	public void waitabit() {
+		driver.manage().timeouts().implicitlyWait((Duration.ofSeconds(10)));	
 	}
 	
 	@AfterSuite
-	public void teardown() {
-//		driver.quit();
-	}
-	
-	public void waitabit() {
-		driver.manage().timeouts().implicitlyWait((Duration.ofSeconds(10)));	
+	public void new_setup() {
+		driver.quit();
+
 	}
 }
