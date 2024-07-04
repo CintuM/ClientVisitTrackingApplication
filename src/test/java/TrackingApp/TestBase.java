@@ -13,13 +13,12 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
-import io.github.bonigarcia.wdm.WebDriverManager;
+
 
 public class TestBase {
-	
+
 	public static WebDriver driver=null;
 	public Properties prop =null;
-	
 	public void loadprop() throws IOException {
 
 		prop = new Properties();		
@@ -30,31 +29,37 @@ public class TestBase {
 	
 	@BeforeSuite
 	public void launch() throws IOException {
-		loadprop();		
-		String browserName = prop.getProperty("browser");
-		System.out.println(browserName);
-		if(browserName.equals("chrome")) {
-
-			//driver =new ChromeDriver();	
-			ChromeOptions option = new ChromeOptions();
-			option.addArguments("incognito");
-			WebDriverManager.chromedriver().setup();
-			driver = new ChromeDriver(option);
-		}
-		else if(browserName.equals("firefox")) {
-
-			driver =new FirefoxDriver();			
-
-		}
+		loadprop();	
+		driver =new ChromeDriver();	
 		driver.get(prop.getProperty("url"));
 		driver.manage().window().maximize();	
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+//		String browserName = prop.getProperty("browser");
+//		System.out.println(browserName);
+//		if(browserName.equals("chrome")) {
+//
+//			//
+//			ChromeOptions option = new ChromeOptions();
+//			option.addArguments("incognito");
+//			WebDriverManager.chromedriver().setup();
+//			driver = new ChromeDriver(option);
+//		}
+//		else if(browserName.equals("firefox")) {
+//
+//			driver =new FirefoxDriver();			
+
+//		}
+
 	}
 	
-//	@AfterSuite
-//	public void new_setup() {
-//		driver.quit();
-//		
-//	}
-//	
+	public void waitabit() {
+		driver.manage().timeouts().implicitlyWait((Duration.ofSeconds(10)));	
+	}
+	
+	@AfterSuite
+	public void new_setup() {
+		driver.quit();
+
+	}
+
 }

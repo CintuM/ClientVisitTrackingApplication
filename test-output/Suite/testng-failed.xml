@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Suite]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="Test(failed)">
+    <classes>
+      <class name="TrackingApp.AddVisitTC">
+        <methods>
+          <include name="launch"/>
+          <include name="addVisit"/>
+          <include name="classSetup"/>
+          <include name="duplicateAddVisit"/>
+          <include name="addContactPerson"/>
+          <include name="emptyFldAddVisit"/>
+          <include name="invalidDataAddVisit"/>
+          <include name="new_setup"/>
+          <include name="visitLogsEexport"/>
+          <include name="validMngrLogin"/>
+        </methods>
+      </class> <!-- TrackingApp.AddVisitTC -->
+      <class name="TrackingApp.TestClass">
+        <methods>
+          <include name="launch"/>
+          <include name="TC_CVT_1_2_11"/>
+          <include name="TC_CVT_1_2_9"/>
+          <include name="new_setup"/>
+          <include name="TC_CVT_1_2_10"/>
+          <include name="TC_CVT_1_1_6"/>
+          <include name="TC_CVT_1_2_6_7_8"/>
+          <include name="TC_CVT_1_2_2"/>
+          <include name="TC_CVT_1_2_1"/>
+          <include name="TC_CVT_1_2_3_5"/>
+          <include name="TC_CVT_1_1_5"/>
+          <include name="TC_CVT_1_21_4"/>
+        </methods>
+      </class> <!-- TrackingApp.TestClass -->
+      <class name="TrackingApp.MilestoneTC">
+        <methods>
+          <include name="launch"/>
+          <include name="milestoneFeature"/>
+          <include name="new_setup"/>
+          <include name="downloadCSV"/>
+          <include name="classSetup"/>
+        </methods>
+      </class> <!-- TrackingApp.MilestoneTC -->
+    </classes>
+  </test> <!-- Test(failed) -->
+</suite> <!-- Failed suite [Suite] -->

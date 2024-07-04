@@ -26,11 +26,11 @@ public class NewInstitutionTestCases extends TestBase {
 		Assert.assertTrue(vistLogHeading.contains(AutomationConstant.EXPECTED_VISIT_LOGS_HEADING), "Visit Logs heading is not present on the page.");
 		newInst.newInstBtn();
 		newInst.instituteType("Government Departments");
-		newInst.instituteName("College of Engineering Punaloor");
+		newInst.instituteName("College of Engineering Palaghat");
 		newInst.instituteEmail("antony@gmail.com");
-		newInst.institutePlace("Punaloor");
+		newInst.institutePlace("Cherupulasherri");
 		newInst.instituteState("Kerala");
-		newInst.instituteDistrict("Kollam");
+		newInst.instituteDistrict("Palakkad");
 		newInst.submitButton();
 		newInst.closePopupButton();
 		String heading = newInst.closePopupHeading();

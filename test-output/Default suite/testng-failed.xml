@@ -3,13 +3,14 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="TrackingApp.VisitLogsActionButtonsTestCases">
+      <class name="TrackingApp.NewInstitutionTestCases">
         <methods>
           <include name="launch"/>
-          <include name="TC_1_2"/>
+          <include name="TC_2_2"/>
+          <include name="new_setup"/>
           <include name="setUp"/>
         </methods>
-      </class> <!-- TrackingApp.VisitLogsActionButtonsTestCases -->
+      </class> <!-- TrackingApp.NewInstitutionTestCases -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
