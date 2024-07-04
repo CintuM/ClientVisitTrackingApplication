@@ -10,9 +10,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.TestNG;
 import org.openqa.selenium.interactions.Actions;
-public class NewInstitution extends TestNG {
+public class NewInstitution  {
 	WebDriver driver;
 	Actions actions;
 	WebDriverWait wait;

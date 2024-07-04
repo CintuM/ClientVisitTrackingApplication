@@ -10,9 +10,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.TestNG;
 
-public class VisitLogsActionButtons extends TestNG {
+public class VisitLogsActionButtons {
 
 	WebDriver driver;
 	Actions actions;
