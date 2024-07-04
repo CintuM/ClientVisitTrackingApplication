@@ -15,7 +15,7 @@ public class TestClass extends TestBase{
 	DashboardPage db;
 
 
-	@Test
+	@Test(priority=1)
 	public void TC_CVT_1_1_1() {
 		System.out.println("Running TC_CVT_1_1_1");
 		login=new LoginPage(driver);
@@ -23,7 +23,7 @@ public class TestClass extends TestBase{
 		Assert.assertEquals(actualResult, AutomationConstant.LoadPageMsg);
 	}
 
-	@Test
+	@Test(priority=3)
 	public void TC_CVT_1_1_3() {
 		System.out.println("Running TC_CVT_1_1_3");
 		login=new LoginPage(driver);
@@ -35,7 +35,7 @@ public class TestClass extends TestBase{
 		Assert.assertEquals(actualResult, AutomationConstant.ExpectedHome);
 	}
 
-	@Test
+	@Test(priority=2)
 	public void TC_CVT_1_1_2_4() {
 		System.out.println("Running TC_CVT_1_1_2_4");
 		waitabit();
@@ -48,7 +48,7 @@ public class TestClass extends TestBase{
 		Assert.assertEquals(actualResult, AutomationConstant.ExpectedHome);
 	}
 
-	@Test
+	@Test(priority=4)
 	public void TC_CVT_1_1_5() {
 		System.out.println("Running TC_CVT_1_1_5");
 		login=new LoginPage(driver);
@@ -57,7 +57,7 @@ public class TestClass extends TestBase{
 		Assert.assertEquals(login.loginInvalid("invalid"), true);
 	}
 
-	@Test
+	@Test(priority=5)
 	public void TC_CVT_1_1_6() {
 		System.out.println("Running TC_CVT_1_1_6");
 		login=new LoginPage(driver);
@@ -68,7 +68,7 @@ public class TestClass extends TestBase{
 	}
 
 
-	@Test
+	@Test(priority=7)
 	public void TC_CVT_1_2_1() {
 		System.out.println("Running TC_CVT_1_2_1");
 		login=new LoginPage(driver);
@@ -83,7 +83,7 @@ public class TestClass extends TestBase{
 	}
 
 
-	@Test
+	@Test(priority=13)
 	public void TC_CVT_1_2_9(){
 		System.out.println("Running TC_CVT_1_2_9");
 		login=new LoginPage(driver);
@@ -97,7 +97,7 @@ public class TestClass extends TestBase{
 		Assert.assertEquals(actualResults, true);		
 	}
 
-	@Test
+	@Test(priority=12)
 	public void TC_CVT_1_2_6_7_8(){
 		System.out.println("Running TC_CVT_1_2_6_7_8");
 		login=new LoginPage(driver);
@@ -112,7 +112,7 @@ public class TestClass extends TestBase{
 
 	}
 
-	@Test
+	@Test(priority=11)
 	public void TC_CVT_1_2_3_5(){
 		System.out.println("Running TC_CVT_1_2_3_5");
 		login=new LoginPage(driver);
@@ -126,7 +126,7 @@ public class TestClass extends TestBase{
 		Assert.assertEquals(actualResults, true);	
 	}
 
-	@Test
+	@Test(priority=10)
 	public void TC_CVT_1_2_2() throws InterruptedException {
 		System.out.println("Running TC_CVT_1_2_2");
 		login=new LoginPage(driver);
@@ -134,14 +134,14 @@ public class TestClass extends TestBase{
 		login.setName(prop.getProperty("useridManagerC"));
 		login.setPwd(prop.getProperty("pwdManagerC"));
 		login.login();
-		actualResults=db.addNewVisit("ICTAK Koratty","Associate 1","Testing","Arun (developer)","TestingNote","31-12-2024");
+		actualResults=db.addNewVisit("ICTAK Koratty","Associate 1","Testing","Arun (developer)","TestingNote","21-07-2024");
 		login.logOut();	
 		Assert.assertEquals(actualResults, true);
 	}
 
 
 
-	@Test
+	@Test(priority=6)
 	public void TC_CVT_1_21_4() throws InterruptedException {
 		System.out.println("Running TC_CVT_1_2_4");
 		login=new LoginPage(driver);
@@ -157,7 +157,7 @@ public class TestClass extends TestBase{
 		Assert.assertEquals(actualResults, true);
 	}
 
-	@Test
+	@Test(priority=8)
 	public void TC_CVT_1_2_10() {
 		System.out.println("Running TC_CVT_1_2_10");
 		login=new LoginPage(driver);
@@ -170,7 +170,7 @@ public class TestClass extends TestBase{
 		Assert.assertEquals(actualResults, true);
 	} 
 
-	@Test
+	@Test(priority=9)
 	public void TC_CVT_1_2_11() throws InterruptedException {
 		System.out.println("Running TC_CVT_1_2_11");
 		login=new LoginPage(driver);

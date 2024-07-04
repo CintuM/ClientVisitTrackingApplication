@@ -58,7 +58,7 @@ public class TestBase {
 	
 	@AfterSuite
 	public void new_setup() {
-		driver.quit();
+//		driver.quit();
 
 	}
 

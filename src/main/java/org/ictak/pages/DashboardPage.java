@@ -79,6 +79,9 @@ public class DashboardPage {
 	@FindBy(xpath="(//button[text()='Close'])[3]")
 	WebElement close1;
 	
+	@FindBy(xpath="(//button[text()='Close'])[1]")
+	WebElement close2;
+	
 	@FindBy(xpath="//td[@class='px-6 py-4 whitespace-nowrap flex space-x-4']")
 	WebElement upcomingvisitNum;
 	
@@ -117,8 +120,8 @@ public class DashboardPage {
 		submit.click();
 		driver.manage().timeouts().implicitlyWait((Duration.ofSeconds(10)));
 		try {
-			if (driver.findElement(By.xpath("//h3[text()='Updated Successfully'])")).isEnabled()) {
-				cancel1.click();
+			if (driver.findElement(By.xpath("//h3[text()='Updated Successfully']")).isEnabled()) {
+				close2.click();				
 				return true;
 			}
 			else {
@@ -126,7 +129,8 @@ public class DashboardPage {
 				return false;
 			}
 		}
-		finally {
+		catch (Exception e) {
+			System.out.println("Invalid Update request");
 			cancel1.click();
 			return false;
 		}
