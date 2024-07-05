@@ -55,6 +55,11 @@ public class TestBase {
 		driver.manage().timeouts().implicitlyWait((Duration.ofSeconds(10)));	
 	}
 
+	
+	@AfterSuite
+	public void new_setup() {
+	driver.quit();
+	}
 	//	@AfterSuite
 	//	public void new_setup() {
 	//		driver.quit();
