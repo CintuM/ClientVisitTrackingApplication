@@ -10,27 +10,19 @@
           <include name="classSetup"/>
           <include name="duplicateAddVisit"/>
           <include name="addContactPerson"/>
+          <include name="emptyFldAddVisit"/>
           <include name="invalidDataAddVisit"/>
-          <include name="new_setup"/>
-          <include name="validMngrLogin"/>
+          <include name="visitLogsEexport"/>
         </methods>
       </class> <!-- TrackingApp.AddVisitTC -->
-      <class name="TrackingApp.TestClass">
+      <class name="TrackingApp.MilestoneTC">
         <methods>
           <include name="launch"/>
-          <include name="TC_CVT_1_2_11"/>
-          <include name="TC_CVT_1_2_9"/>
-          <include name="new_setup"/>
-          <include name="TC_CVT_1_2_10"/>
-          <include name="TC_CVT_1_1_6"/>
-          <include name="TC_CVT_1_2_6_7_8"/>
-          <include name="TC_CVT_1_2_2"/>
-          <include name="TC_CVT_1_2_1"/>
-          <include name="TC_CVT_1_2_3_5"/>
-          <include name="TC_CVT_1_1_5"/>
-          <include name="TC_CVT_1_21_4"/>
+          <include name="milestoneFeature"/>
+          <include name="downloadCSV"/>
+          <include name="classSetup"/>
         </methods>
-      </class> <!-- TrackingApp.TestClass -->
+      </class> <!-- TrackingApp.MilestoneTC -->
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite] -->

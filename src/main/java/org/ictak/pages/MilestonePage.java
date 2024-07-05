@@ -20,13 +20,15 @@ public class MilestonePage {
 	public  MilestonePage(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
-		this.wait=new WebDriverWait(driver,Duration.ofSeconds(30));
+		this.wait=new WebDriverWait(driver,Duration.ofSeconds(10));
 	}
 
 	@FindBy(name="userId")
 	WebElement uname;
 	@FindBy(css = "input[name='password']")
 	WebElement pw;
+	@FindBy(xpath="//button[contains(text(),'Sign In')]")
+	WebElement sgnInBtn;
 	@FindBy(xpath = "//span[@class='ms-3' and contains(text(),'Dashboard')]")
 	WebElement dashbrdPage;
 	@FindBy(xpath = "//h2[contains(text(),'Milestones')]")
@@ -39,14 +41,24 @@ public class MilestonePage {
 	WebElement goBtn;
 	@FindBy(xpath ="//a[@download='visit_data.csv' and contains(text(),'Export CSV')]")
 	WebElement downloadData;
+	@FindBy(xpath ="//img[@src='/static/media/Profile Picture.4adcbd95bd8d4932c37d71ad885c4c76.svg']")
+	WebElement profileImg;
+	@FindBy(xpath="//div[text()='Logout']")
+	WebElement logout;
 
-//	public void userName(String mangr_uname) {;
-//	uname.sendKeys(mangr_uname);
-//	}
-//	public void password(String mngr_passwd) {
-//
-//		pw.sendKeys(mngr_passwd);
-//	}
+	public void userName(String mangr_uname) {;
+	uname.sendKeys(mangr_uname);
+	}
+	public void password(String mngr_passwd) {
+
+		pw.sendKeys(mngr_passwd);
+	}
+	public void loginBtn() {	
+
+		System.out.println("login btn");
+		wait.until(ExpectedConditions.elementToBeClickable(sgnInBtn));
+		sgnInBtn.click();
+	}
 
 	public String getDashbdMileston() {
 		wait.until(ExpectedConditions.visibilityOf(dashbrdPage));
@@ -62,15 +74,12 @@ public class MilestonePage {
 		organizatnType.click();
 		Select orgType = new Select(organizatnType);
 		orgType.selectByVisibleText("Academic Institutions");
-		// organizatnType.sendKeys(Keys.RETURN);
-		System.out.println("123");
+		// organizatnType.sendKeys(Keys.RETURN);		
 		wait.until(ExpectedConditions.elementToBeClickable(organizatnName));
 		organizatnName.click();
 		Select orgName = new Select(organizatnName);
-		orgName.selectByVisibleText("ITI");
-		System.out.println("11");
-		//organizatnName.sendKeys(Keys.ENTER);
-		System.out.println("1233");
+		orgName.selectByVisibleText("ITI");		
+		//organizatnName.sendKeys(Keys.ENTER);		
 		wait.until(ExpectedConditions.elementToBeClickable(goBtn));
 		goBtn.click();
 
@@ -79,6 +88,11 @@ public class MilestonePage {
 		wait.until(ExpectedConditions.visibilityOf(downloadData));
 		Actions actions = new Actions(driver);
 		actions.moveToElement(downloadData).click().perform();	
+	}
+	public void logOut() {
+		profileImg.click();
+		wait.until(ExpectedConditions.elementToBeClickable(logout));
+		logout.click();
 	}
 
 }
