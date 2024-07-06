@@ -20,14 +20,15 @@ public class MilestoneTC extends TestBase{
 		milestonepage = new MilestonePage(driver);
 		addvisitObj = new AddVisitPage(driver);
 
-	}
+	}	
 	@Test(priority = 1)
 	public void milestoneFeature() throws InterruptedException {
-
+		driver.navigate().refresh();
+		System.out.println("Test Case: TC_CVT_1.3.1");
 		driver.navigate().refresh();		
-//		milestonepage.userName(prop.getProperty("manager_uname"));
-//		milestonepage.password(prop.getProperty("manager_psw"));
-//		addvisitObj.loginBtn();
+		milestonepage.userName(prop.getProperty("manager_uname"));
+		milestonepage.password(prop.getProperty("manager_psw"));
+		addvisitObj.loginBtn();
 		actualResult = milestonepage.getDashbdMileston();		
 		Assert.assertEquals(actualResult, AutomationConstant.DashBrdMilestones);	
 		System.out.println(actualResult+": Valid Login completed");
@@ -37,6 +38,7 @@ public class MilestoneTC extends TestBase{
 	}
 	@Test(priority = 2)
 	public void downloadCSV() throws InterruptedException {
+		System.out.println("Test Case: TC_CVT_1.3.2");
 		System.out.println("download csv");					
 		milestonepage.exportCSV();		
 		String downloadDir = System.getProperty("user.home") + "\\Downloads";
@@ -55,6 +57,7 @@ public class MilestoneTC extends TestBase{
 			System.out.println("Failed to download the file within the specified time.");
 		}
 		Assert.assertTrue(downloadedFile.exists(), "The file was  downloaded successfully.");
+		milestonepage.logOut();
 
 	}
 

@@ -29,7 +29,8 @@ public class TestBase {
 	public void launch() throws IOException {
 		loadprop();	
 
-		this.driver = new ChromeDriver();
+		//this.driver = new ChromeDriver();
+		driver =new ChromeDriver();	
 		driver.get(prop.getProperty("url"));
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
@@ -53,10 +54,15 @@ public class TestBase {
 	public void waitabit() {
 		driver.manage().timeouts().implicitlyWait((Duration.ofSeconds(10)));	
 	}
+
 	
 	@AfterSuite
 	public void new_setup() {
-//		driver.quit();
-
+	driver.quit();
 	}
+	//	@AfterSuite
+	//	public void new_setup() {
+	//		driver.quit();
+	//
+	//	}
 }

@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 
 import javax.xml.xpath.XPath;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -21,7 +22,7 @@ public class AddVisitPage {
 	public  AddVisitPage(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
-		this.wait=new WebDriverWait(driver,Duration.ofSeconds(30));
+		this.wait=new WebDriverWait(driver,Duration.ofSeconds(10));
 	}
 	@FindBy(name="userId")
 	WebElement uname;
@@ -116,6 +117,17 @@ public class AddVisitPage {
 	WebElement cont_cancelBtn;
 	@FindBy(xpath = "//h3[contains(text(),'Thank you for adding new contact person')]//following-sibling::button")
 	WebElement cont_CloseBtn;
+	@FindBy(xpath ="//img[@src='/static/media/Profile Picture.4adcbd95bd8d4932c37d71ad885c4c76.svg']")
+	WebElement profileImg;
+	@FindBy(xpath="//div[text()='Logout']")
+	WebElement logout;
+	//	@FindBy(xpath = "//p[contains(text(),'Cannot be empty or contain only spaces')]")
+	@FindBy(xpath = "//p[contains(text(),'Required')]")
+	WebElement nameErr;
+	@FindBy(xpath = "//*[@id='designation']")
+	WebElement emptyDesigntn;
+	@FindBy(xpath = "(//button[contains(text(),'Cancel')])[4]")
+	WebElement addCntCancel;
 
 	String rsltMsg="";
 	String duplicateRslt="";
@@ -137,13 +149,14 @@ public class AddVisitPage {
 	}
 
 	public String getDashbord() {
+		System.out.println("DashBoard");
 		wait.until(ExpectedConditions.textToBePresentInElement(dashbrd, dashbrd.getText()));
 		String dashbrd_rslt=dashbrd.getText();
 		return dashbrd_rslt;
 	}
 
 	public String addVisitForm(String institute, String emp, String date1, String visitPurps,String contPersn,String adNote, String discTopic) {
-		System.out.println("new visit");
+		System.out.println("new visit form");
 		wait.until(ExpectedConditions.visibilityOf(visitLogs));
 		visitLogs.click();
 		wait.until(ExpectedConditions.elementToBeClickable(addVstBtn));
@@ -153,7 +166,6 @@ public class AddVisitPage {
 		sel_Institution.sendKeys(institute);	
 		sel_Institution.sendKeys(Keys.RETURN);
 
-		System.out.println("emp"+emp);
 		sel_employee.clear();
 		wait.until(ExpectedConditions.visibilityOf(sel_employee));		
 		sel_employee.sendKeys(emp);		
@@ -198,7 +210,8 @@ public class AddVisitPage {
 	}
 
 	public String addNewVisit() {
-		addVisitForm("COT Thalassery", "Associate 1","5-07-2024","Test","Vinod (HoD)","TestAddNote","Test Disc topic");
+		System.out.println("Add New Visit");
+		addVisitForm("COT Thalassery", "Associate 1","7-07-2024","Test","Vinod (HoD)","TestAddNote","Test Disc topic");
 		if(vistSubmitBtn.isEnabled()) {
 			Actions actions = new Actions(driver);
 			actions.moveToElement(vistSubmitBtn).click().perform();	
@@ -216,7 +229,8 @@ public class AddVisitPage {
 
 
 	public String duplicateVisitEntry() {
-		addVisitForm("COT Thalassery", "Associate 1","5-07-2024","Test","Vinod (HoD","TestAddNote","Test Disc topic");
+		System.out.println("Dupicate Data Prevention");
+		addVisitForm("COT Thalassery", "Associate 1","7-07-2024","Test","Vinod (HoD","TestAddNote","Test Disc topic");
 		if(vistSubmitBtn.isEnabled()) {			
 			Actions actions = new Actions(driver);
 			actions.moveToElement(vistSubmitBtn).click().perform();
@@ -233,7 +247,8 @@ public class AddVisitPage {
 	}
 
 	public String invalidDataFldAdVisit() {
-		addVisitForm("COT Thalassery", "Associate 1","5-07-2024","Test","Arshad T (PC)","@3$","Test Disc topic");
+		System.out.println("Invalid Data field validation");
+		addVisitForm("COT Thalassery", "Associate 1","7-07-2024","Test","Arshad T (PC)","@*^$","Test Disc topic");
 		if(vistSubmitBtn.isEnabled()) {
 			Actions actions = new Actions(driver);
 			actions.moveToElement(vistSubmitBtn).click().perform();	
@@ -246,7 +261,7 @@ public class AddVisitPage {
 	}
 
 	public String emptyFldAdVisit() {		
-		addVisitForm("", "Associate 1","5-07-2024","Test","Arshad T (PC)","TestAddNote","Test Disc topic");
+		addVisitForm("", "Associate 1","7-07-2024","Test","Arshad T (PC)","TestAddNote","Test Disc topic");
 		if(vistSubmitBtn.isEnabled()) {
 			Actions actions = new Actions(driver);
 			actions.moveToElement(vistSubmitBtn).click().perform();	
@@ -280,74 +295,84 @@ public class AddVisitPage {
 		sel_employee.sendKeys(emp);		
 		sel_employee.sendKeys(Keys.RETURN);
 
-		/*
-		 * wait.until(ExpectedConditions.elementToBeClickable(setDate));
-		 * setDate.clear(); setDate.click(); setDate.sendKeys("30-06-2024"+" "+"T1030");
-		 * setDate.sendKeys(Keys.ENTER)
-		 */;
+		wait.until(ExpectedConditions.elementToBeClickable(setDate));		
+		setDate.sendKeys(date1);
+		setDate.sendKeys(Keys.TAB);
+		setDate.sendKeys("14:45");
+		setDate.sendKeys(Keys.ENTER);
 
-		 wait.until(ExpectedConditions.elementToBeClickable(setDate));		
-		 setDate.sendKeys(date1);
-		 setDate.sendKeys(Keys.TAB);
-		 setDate.sendKeys("14:45");
-		 setDate.sendKeys(Keys.ENTER);
+		wait.until(ExpectedConditions.elementToBeClickable(purpose));
+		purpose.sendKeys(visitPurps);
 
-		 wait.until(ExpectedConditions.elementToBeClickable(purpose));
-		 purpose.sendKeys(visitPurps);
+		if(contPersn.isEmpty()) {			
+			wait.until(ExpectedConditions.elementToBeClickable(addContPerson));
+			Actions actions = new Actions(driver);
+			actions.moveToElement(addContPerson).click().perform();			 
+			contPersn=addContact();			
 
-		 if(contPersn.isEmpty()) {			
-			 wait.until(ExpectedConditions.elementToBeClickable(addContPerson));
-			 Actions actions = new Actions(driver);
-			 actions.moveToElement(addContPerson).click().perform();	
-			 System.out.println("12");
-			 contPersn=addContact();			
+		}
 
-		 }
-
-		 wait.until(ExpectedConditions.elementToBeClickable(cont_person));
-		 cont_person.sendKeys(contPersn);
-		 cont_person.sendKeys(Keys.RETURN);
-		 wait.until(ExpectedConditions.elementToBeClickable(additionalNotes));
-		 additionalNotes.sendKeys(adNote);
-		 wait.until(ExpectedConditions.elementToBeClickable(discnTopic));
-		 discnTopic.sendKeys(discTopic);
-		 wait.until(ExpectedConditions.elementToBeClickable(vistSubmitBtn));		 
-		 if(vistSubmitBtn.isEnabled()) {
-			 Actions actions = new Actions(driver);
-			 actions.moveToElement(vistSubmitBtn).click().perform();	
-			 wait.until(ExpectedConditions.visibilityOf(addedVisit));
-			 rsltMsg=addedVisit.getText();
-			 wait.until(ExpectedConditions.elementToBeClickable(visitCloseBtn));
-			 visitCloseBtn.click();
-		 }
-		 else {
-			 wait.until(ExpectedConditions.elementToBeClickable(adVistCancel));
-			 adVistCancel.click();
-		 }
-		 return rsltMsg;
+		wait.until(ExpectedConditions.elementToBeClickable(cont_person));
+		cont_person.sendKeys(contPersn);
+		cont_person.sendKeys(Keys.RETURN);
+		wait.until(ExpectedConditions.elementToBeClickable(additionalNotes));
+		additionalNotes.sendKeys(adNote);
+		wait.until(ExpectedConditions.elementToBeClickable(discnTopic));
+		discnTopic.sendKeys(discTopic);
+		wait.until(ExpectedConditions.elementToBeClickable(vistSubmitBtn));		 
+		if(vistSubmitBtn.isEnabled()) {
+			Actions actions = new Actions(driver);
+			actions.moveToElement(vistSubmitBtn).click().perform();	
+			wait.until(ExpectedConditions.visibilityOf(addedVisit));
+			rsltMsg=addedVisit.getText();
+			wait.until(ExpectedConditions.elementToBeClickable(visitCloseBtn));
+			visitCloseBtn.click();
+		}
+		else {
+			wait.until(ExpectedConditions.elementToBeClickable(adVistCancel));
+			adVistCancel.click();
+		}
+		return rsltMsg;
 	}
 
 	public String addContact() {
+		System.out.println("Add Contact");
 		wait.until(ExpectedConditions.elementToBeClickable(contName));
-		String contPersn ="Ram";
-		contName.sendKeys(contPersn);		
+		String contPersn ="Aliya";
+		contName.sendKeys(contPersn);			
 		wait.until(ExpectedConditions.elementToBeClickable(cont_Designation));
-		cont_Designation.sendKeys("HoD");		
+		cont_Designation.sendKeys("");
 		wait.until(ExpectedConditions.elementToBeClickable(cont_email));
-		cont_email.sendKeys("Test@gmail.com");		
+		cont_email.sendKeys("TestAli@gmail.com");		
 		wait.until(ExpectedConditions.elementToBeClickable(cont_number));
 		cont_number.click();
 		cont_number.sendKeys("1234567891");
 		wait.until(ExpectedConditions.elementToBeClickable(cont_submitBtn));
 		//cont_submitBtn.click();
 		Actions actions = new Actions(driver);
-		actions.moveToElement(cont_submitBtn).click().perform();		
-		wait.until(ExpectedConditions.elementToBeClickable(cont_CloseBtn));
-		cont_CloseBtn.click();
+		actions.moveToElement(cont_submitBtn).click().perform();			
+		String errMsg_Cont=nameErr.getText();
+		System.out.println(errMsg_Cont);
+		if(nameErr.isDisplayed()) {
+
+			wait.until(ExpectedConditions.elementToBeClickable(cont_Designation));
+			cont_Designation.clear();
+			cont_Designation.sendKeys("HoD");
+			Actions actions1 = new Actions(driver);
+			actions1.moveToElement(cont_submitBtn).click().perform();
+			wait.until(ExpectedConditions.elementToBeClickable(cont_CloseBtn));		
+			cont_CloseBtn.click();
+		}
+		else {
+		Actions actions1 = new Actions(driver);
+		actions1.moveToElement(addCntCancel).click().perform();}
+		
+		
 		return contPersn;
 	}
 
 	public void exportVisitLogs() {
+		System.out.println("Export Visit Log");
 		wait.until(ExpectedConditions.visibilityOf(visitLogs));
 		visitLogs.click();
 		wait.until(ExpectedConditions.elementToBeClickable(empSelct));
@@ -358,6 +383,11 @@ public class AddVisitPage {
 		Actions actions = new Actions(driver);
 		actions.moveToElement(exportData).click().perform();		
 
+	}
+	public void logOut() {
+		profileImg.click();
+		wait.until(ExpectedConditions.elementToBeClickable(logout));
+		logout.click();
 	}
 
 
